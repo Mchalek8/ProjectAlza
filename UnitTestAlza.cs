@@ -28,6 +28,7 @@ namespace ProjectAlza
             Assert.IsNotEmpty(rootResponseContent.url, "Position url is missing.");
 
             // Print job placement
+            Console.WriteLine("Job Address:");
             Console.WriteLine("Name: " + rootResponseContent.placeOfEmployment.name);
             Console.WriteLine("State: " + rootResponseContent.placeOfEmployment.state);
             Console.WriteLine("City: " + rootResponseContent.placeOfEmployment.city);
@@ -39,12 +40,14 @@ namespace ProjectAlza
             var gestorUserDataRequest = new RestRequest(gestorUser, DataFormat.Json);
             var gestorUserDataResponse = client.Get(gestorUserDataRequest);
             var gestorUserDataRequestContent = Newtonsoft.Json.JsonConvert.DeserializeObject<GestorUserRoot>(gestorUserDataResponse.Content);
+            Console.WriteLine("Interview Host:");
             Console.WriteLine("Host Name: " + gestorUserDataRequestContent.name);
             Assert.IsNotEmpty(gestorUserDataRequestContent.image, "Image is not available.");
             Console.WriteLine("Description: " + gestorUserDataRequestContent.description);
 
             // Print if the position is for students.
-            PossitionAttributes.checkIfPositionIsForStudents(rootResponseContent.forStudents);
+            Console.WriteLine("Availability For Students:");
+            PositionAttributes.checkIfPositionIsForStudents(rootResponseContent.forStudents);
         }
     }
 }

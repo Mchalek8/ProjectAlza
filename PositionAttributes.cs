@@ -2,7 +2,7 @@
 
 namespace ProjectAlza
 {
-    class PossitionAttributes
+    class PositionAttributes
     {
         public static void checkIfPositionIsForStudents(bool forStudentsAvailability)
         {
