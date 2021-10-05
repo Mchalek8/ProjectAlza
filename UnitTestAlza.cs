@@ -18,9 +18,9 @@ namespace ProjectAlza
         public void VerifyJobAttributes()
         {
             // Get endpoint objects
-            var request = new RestRequest("/api/career/v2/positions/softwarovy-tester?country=cz", DataFormat.Json);
-            var response = client.Get(request);
-            var rootResponseContent = JsonConvert.DeserializeObject<Root>(response.Content);
+            RestRequest request = new RestRequest("/api/career/v2/positions/softwarovy-tester?country=cz", DataFormat.Json);
+            IRestResponse response = client.Get(request);
+            Root rootResponseContent = JsonConvert.DeserializeObject<Root>(response.Content);
 
             // Verify if position contains description
             Assert.IsNotEmpty(rootResponseContent.name, "Position name is missing.");
@@ -36,10 +36,10 @@ namespace ProjectAlza
             Console.WriteLine("Street: " + rootResponseContent.placeOfEmployment.postalCode);
 
             // Print interiview host info.
-            var gestorUser = rootResponseContent.gestorUser.meta.href;
-            var gestorUserDataRequest = new RestRequest(gestorUser, DataFormat.Json);
-            var gestorUserDataResponse = client.Get(gestorUserDataRequest);
-            var gestorUserDataRequestContent = Newtonsoft.Json.JsonConvert.DeserializeObject<GestorUserRoot>(gestorUserDataResponse.Content);
+            String gestorUser = rootResponseContent.gestorUser.meta.href;
+            RestRequest gestorUserDataRequest = new RestRequest(gestorUser, DataFormat.Json);
+            IRestResponse gestorUserDataResponse = client.Get(gestorUserDataRequest);
+            GestorUserRoot gestorUserDataRequestContent = Newtonsoft.Json.JsonConvert.DeserializeObject<GestorUserRoot>(gestorUserDataResponse.Content);
             Console.WriteLine("Interview Host:");
             Console.WriteLine("Host Name: " + gestorUserDataRequestContent.name);
             Assert.IsNotEmpty(gestorUserDataRequestContent.image, "Image is not available.");
