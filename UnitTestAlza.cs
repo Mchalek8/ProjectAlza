@@ -20,7 +20,7 @@ namespace ProjectAlza
             // Get endpoint objects
             RestRequest request = new RestRequest("/api/career/v2/positions/softwarovy-tester?country=cz", DataFormat.Json);
             IRestResponse response = client.Get(request);
-            Root rootResponseContent = JsonConvert.DeserializeObject<Root>(response.Content);
+            PositionRoot rootResponseContent = JsonConvert.DeserializeObject<PositionRoot>(response.Content);
 
             // Verify if position contains description
             Assert.IsNotEmpty(rootResponseContent.name, "Position name is missing.");

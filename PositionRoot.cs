@@ -64,7 +64,7 @@ namespace ProjectAlza
         public PositionsMeta meta { get; set; }
     }
 
-    public class Root
+    public class PositionRoot
     {
         public string name { get; set; }
         public string seoName { get; set; }
